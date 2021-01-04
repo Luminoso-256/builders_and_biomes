@@ -5,6 +5,8 @@
 - Complete Game Reimplementation
 - Online Multiplayer (server/client,no peer-to-peer)
 
+### Why?
+It's a nice test of some libraries I plan to use for other projects.
 
 
 

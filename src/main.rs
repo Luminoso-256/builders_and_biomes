@@ -30,4 +30,12 @@ async fn main() {
 
 
     //===Gameloop
+    loop{
+        //Logic
+
+        //Draw
+
+        //Ready for next frame
+        next_frame().await
+    }
 }

@@ -179,7 +179,44 @@ pub enum BlockType{
     Emerald
 }
 
-//Numbers of things
+//Monster types
+pub enum MobType{
+    Zombie,
+    Creeper,
+    Enderman,
+    Spider,
+    Witch,
+    Skeleton
+}
+
+//Monster heart count
+pub const ENDERMAN_HEALTH:i32 = 6;
+pub const WITCH_HEALTH:i32 = 5;
+pub const CREEPER_HEALTH:i32 = 4;
+pub const SKELETON_HEALTH:i32 = 3;
+pub const SPIDER_HEALTH:i32 = 1;
+
+//Monster XP count - some monsters have different XP variants, so we have an array - these variants have different icons on the oppoiste corner however.
+pub const ENDERMAN_XP:[i32;2] = [6, 6];
+pub const WITCH_XP:[i32;2] = [5, 5];
+pub const CREEPER_XP:[i32;2] = [4, 5];
+pub const SKELETON_XP:[i32;2] = [3,4];
+pub const SPIDER_XP:[i32;2] = [2, 2];
+
+
+//Weapon types
+pub enum WeaponType{
+    Bow,
+    GoldenHoe,
+    WoodSword,
+    StoneSword,
+    IronSword,
+    DiamondSword,
+    StonePickaxe,
+    Tnt
+}
+
+//Numbers of things overall
 pub const RESOURCE_CUBE_COUNT:i32 = 64;
 pub const TILE_COUNT:i32 = 64;
 pub const WEAPON_TOKEN_COUNT:i32 = 36;
@@ -188,3 +225,5 @@ pub const SAND_BLOCK_COUNT:i32 = 14;
 pub const STONE_BLOCK_COUNT:i32 = 12;
 pub const OBSIDIAN_BLOCK_COUNT:i32 = 10;
 pub const EMERALD_BLOCK_COUNT:i32 = 12;
+
+//Defining Building Tiles!
