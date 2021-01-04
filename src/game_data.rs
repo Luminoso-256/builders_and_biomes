@@ -5,6 +5,10 @@ Game Data
 - Some generation logic is here
 */
 
+use rand::prelude::*;
+use crate::game_data::BlockType::Obsidian;
+use crate::game_data::ActionType::BlockCollect;
+
 //main game state struct
 pub struct GameState {
 
@@ -48,6 +52,101 @@ pub struct ResourceCube{
     layer_3:Vec<BlockType>,
     layer_4:Vec<BlockType>
 }
+//resource cube generation
+pub fn create_resource_cube() -> ResourceCube {
+    let mut layer_1: Vec<BlockType> = vec![];
+    let mut layer_2: Vec<BlockType> = vec![];
+    let mut layer_3: Vec<BlockType> = vec![];
+    let mut layer_4: Vec<BlockType> = vec![];
+    let mut wood_left = WOOD_BLOCK_COUNT;
+    let mut sand_left = SAND_BLOCK_COUNT;
+    let mut stone_left = STONE_BLOCK_COUNT;
+    let mut obsidian_left = OBSIDIAN_BLOCK_COUNT;
+    let mut emerald_left = EMERALD_BLOCK_COUNT;
+
+    //iterate through and fill up all the layers
+    for layer in 0..3 {
+        for i in 0..15 {
+            //create block
+            let block = gen_block(wood_left, sand_left, stone_left, obsidian_left, emerald_left);
+            //decrement quotas
+            match block {
+                BlockType::Wood => { wood_left -= 1; }
+                BlockType::Sand => { sand_left -= 1; }
+                BlockType::Stone => { stone_left -= 1; }
+                BlockType::Obsidian => { obsidian_left -= 1; }
+                BlockType::Emerald => { emerald_left -= 1; }
+            }
+            //assign to layer
+            match layer{
+                0 => {layer_1[i] = block;}
+                1 => {layer_2[i] = block;}
+                2 => {layer_3[i] = block;}
+                3 => {layer_4[i] = block;}
+                _ => {}
+            }
+        }
+    }
+    //create our cube, and return it
+    ResourceCube{
+        layer_1,
+        layer_2,
+        layer_3,
+        layer_4
+    }
+}
+///Generate a single block,given quotas of how many blocks are left of each type.
+fn gen_block(wood:i32, sand:i32, stone:i32, obsidian:i32, emerald:i32) -> BlockType{
+    let mut rng = rand::thread_rng();
+    let blocktype = rng.gen_range(0, 4);
+    let mut block:BlockType = BlockType::Wood;//this should always be overwritten
+    match blocktype{
+        0 =>{
+            if wood != 0 { //we have some left in our quota
+                block = BlockType::Wood;
+            }
+            else{
+                block = gen_block(wood, sand, stone, obsidian, emerald); //recusive calls are amazing.
+            }
+        }
+        1 => {
+            if sand != 0 { //we have some left in our quota
+                block = BlockType::Sand;
+            }
+            else{
+                block = gen_block(wood, sand, stone, obsidian, emerald);
+            }
+        }
+        2 => {
+            if stone != 0 { //we have some left in our quota
+                block = BlockType::Stone;
+            }
+            else{
+                block = gen_block(wood, sand, stone, obsidian, emerald);
+            }
+        }
+        3 => {
+            if obsidian != 0 { //we have some left in our quota
+                block = BlockType::Obsidian;
+            }
+            else{
+                block = gen_block(wood, sand, stone, obsidian, emerald);
+            }
+        }
+        4 => {
+            if emerald != 0 { //we have some left in our quota
+                block = BlockType::Emerald;
+            }
+            else{
+                block = gen_block(wood, sand, stone, obsidian, emerald);
+            }
+        }
+
+        _ => {}
+    }
+    block
+}
+
 
 //Main board - 16 structs of 4 each
 pub struct GameBoard{
