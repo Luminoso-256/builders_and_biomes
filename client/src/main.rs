@@ -5,6 +5,8 @@
 //module declarations
 mod game_data;
 mod net;
+mod packet;
+
 //using statments
 use macroquad::prelude::*;
 
