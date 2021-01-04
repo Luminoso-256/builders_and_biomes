@@ -1,8 +1,11 @@
 //Builders and Biomes reimplementation
 //Minecraft and Minecraft: Builders and biomes are trademarks of Mojang and Microsoft.
 
-mod game_data;
 
+//module declarations
+mod game_data;
+mod net;
+//using statments
 use macroquad::prelude::*;
 
 
