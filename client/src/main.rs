@@ -4,12 +4,13 @@
 
 //module declarations
 mod game_data;
-mod net;
 mod packet;
+mod client_data;
 
 //using statments
 use macroquad::prelude::*;
-
+use std::net::{TcpStream};
+use std::io::{Read, Write};
 
 //====Window configuration
 fn window_conf() -> Conf {
@@ -22,22 +23,8 @@ fn window_conf() -> Conf {
 }
 
 //====Main
-#[macroquad::main(window_conf)]
+//#[macroquad::main(window_conf)]
 async fn main() {
     //===Setup
-    let mut scoring_rounds_left = 3;
 
-
-
-
-
-    //===Gameloop
-    loop{
-        //Logic
-
-        //Draw
-
-        //Ready for next frame
-        next_frame().await
-    }
 }

@@ -1,2 +1,6 @@
 /target
 /reference
+/client/target
+/server/target
+/client/.idea
+/server/.idea

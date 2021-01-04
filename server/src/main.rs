@@ -2,42 +2,34 @@
 //Minecraft and Minecraft: Builders and biomes are trademarks of Mojang and Microsoft.
 
 
+use std::net::{TcpListener, TcpStream};
+use std::io::Read;
+
 //module declarations
 mod game_data;
-mod net;
 mod packet;
 
-//using statments
-use macroquad::prelude::*;
-
-
-//====Window configuration
-fn window_conf() -> Conf {
-    Conf {
-        window_title: format!("Builders and Biomes").to_owned(),
-        window_width: 1280,
-        window_height: 960,
-        ..Default::default()
-    }
-}
-
 //====Main
-#[macroquad::main(window_conf)]
-async fn main() {
+fn main() {
     //===Setup
     let mut scoring_rounds_left = 3;
 
 
+    //===Initializing server
+    println!("Binding to socket 24454");
+    let listener = TcpListener::bind("127.0.0.1:24454").unwrap();
 
-
-
-    //===Gameloop
-    loop{
-        //Logic
-
-        //Draw
-
-        //Ready for next frame
-        next_frame().await
+    //listen for incoming connections
+    for stream in listener.incoming() {
+        let stream = stream.unwrap();
+        println!("Connection recieved");
+        handle_connection(stream);
     }
+}
+fn handle_connection(mut stream: TcpStream) {
+    let mut buffer = [0; 1024];
+
+    stream.read(&mut buffer).unwrap();
+
+    println!("Request: {}", String::from_utf8_lossy(&buffer[..]));
 }

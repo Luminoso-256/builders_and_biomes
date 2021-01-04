@@ -189,19 +189,18 @@ pub enum MobType{
     Skeleton
 }
 
-//Monster heart count
-pub const ENDERMAN_HEALTH:i32 = 6;
-pub const WITCH_HEALTH:i32 = 5;
-pub const CREEPER_HEALTH:i32 = 4;
-pub const SKELETON_HEALTH:i32 = 3;
-pub const SPIDER_HEALTH:i32 = 1;
+pub struct Mob{
+    health:i32,
+    experience:i32,
+    additional_action:bool,
+    keep_end_count:i32,
+    keep_end_biome:BiomeType
+}
 
-//Monster XP count - some monsters have different XP variants, so we have an array - these variants have different icons on the oppoiste corner however.
-pub const ENDERMAN_XP:[i32;2] = [6, 6];
-pub const WITCH_XP:[i32;2] = [5, 5];
-pub const CREEPER_XP:[i32;2] = [4, 5];
-pub const SKELETON_XP:[i32;2] = [3,4];
-pub const SPIDER_XP:[i32;2] = [2, 2];
+pub enum BiomeType{
+    Forest
+}
+
 
 
 //Weapon types
@@ -213,7 +212,8 @@ pub enum WeaponType{
     IronSword,
     DiamondSword,
     StonePickaxe,
-    Tnt
+    Tnt,
+    PoisonPotato
 }
 
 //Numbers of things overall
