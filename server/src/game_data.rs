@@ -190,6 +190,7 @@ pub enum MobType{
 }
 
 pub struct Mob{
+    mob_type:MobType,
     health:i32,
     experience:i32,
     additional_action:bool,
@@ -197,11 +198,54 @@ pub struct Mob{
     keep_end_biome:BiomeType
 }
 
+//Reference Image: mobs_1
+
+//Reference Image: mobs_2a
+
+//Reference Image: mobs_2b
+
+//Reference Image: mobs_3
+pub const MOB_SKELETON_EXTURN:Mob = Mob{
+    mob_type:MobType::Skeleton,
+    health: 3,
+    experience:4,
+    additional_action: true,
+    keep_end_count: 0,
+    keep_end_biome: BiomeType::Forest
+};
+pub const MOB_SPIDER_EXTURN:Mob = Mob{
+    mob_type: MobType::Spider,
+    health: 1,
+    experience: 2,
+    additional_action: true,
+    keep_end_count: 0,
+    keep_end_biome: BiomeType::Forest
+};
+pub const MOB_ZOMBIE_EXTURN:Mob = Mob{
+    mob_type: MobType::Zombie,
+    health: 2,
+    experience: 3,
+    additional_action: true,
+    keep_end_count: 0,
+    keep_end_biome: BiomeType::Forest
+};
+
 pub enum BiomeType{
-    Forest
+    Forest,
+    Snow,
+    Rocky,
+    Desert
 }
 
+pub struct Buildable{
+    biome:BiomeType,
+    materials:Vec<BlockType>
+}
 
+pub struct Player{
+    x_junction:i32,
+    y_junction:i32
+}
 
 //Weapon types
 pub enum WeaponType{
